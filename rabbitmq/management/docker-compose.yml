@@ -1,9 +1,9 @@
 version: '2'
 
 services:
-  rabbitmq-3.6.12:
-    image: "rabbitmq:3.6.12"
-    container_name: rabbitmq-3.6.12
+  rabbitmq-3.6.12-management:
+    image: "rabbitmq:3.6.12-management"
+    container_name: rabbitmq-3.6.12-management
     environment:
       - RABBITMQ_ERLANG_COOKIE='rabbitmq-cluster-cookies'
       - RABBITMQ_CLUSTER_PARTITION_HANDLING=pause_minority
