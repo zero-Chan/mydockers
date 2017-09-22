@@ -1,0 +1,24 @@
+version: '2'
+
+services:
+  rabbitmq-3.6.12:
+    image: "rabbitmq:3.6.12"
+    container_name: rabbitmq-3.6.12
+    environment:
+      - RABBITMQ_ERLANG_COOKIE='rabbitmq-cluster-cookies'
+      - RABBITMQ_CLUSTER_PARTITION_HANDLING=pause_minority
+    ports:
+      - 15672:15672
+      - 5672:5672
+      - 4369:4369
+      - 25672:25672
+    volumes:
+      - rabbitmq-store:/var/lib/rabbitmq
+    hostname: my-rabbitmq
+    restart: always
+#    extra_hosts:
+#      - "mq-dk1:172.18.5.222"
+#      - "mq-dk3:172.18.5.142"
+
+volumes:
+  rabbitmq-store:
