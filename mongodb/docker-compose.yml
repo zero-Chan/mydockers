@@ -1,0 +1,17 @@
+version: '2'
+
+services:
+  mongodb-3.2.7:
+    image: "mongo:3.2.7"
+    container_name: mongodb-3.2.7
+    environment:
+      - TZ=Asia/Shanghai
+    ports:
+      - 127.0.0.1:27017:27017
+    volumes:
+      - mongo-store:/data
+    hostname: mongo-137
+    restart: unless-stopped
+
+volumes:
+  mongo-store:

@@ -1,0 +1,14 @@
+version: '2'
+
+services:
+  redis-3.2.10:
+    image: "redis:3.2.10"
+    container_name: redis-3.2.10
+    restart: unless-stopped
+    volumes:
+      - redis-3.2.10-volume:/data
+    command: --bind 0.0.0.0 --port 10379
+    network_mode: host
+
+volumes:
+  redis-3.2.10-volume:

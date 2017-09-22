@@ -1,0 +1,28 @@
+version: '2'
+
+services:
+  etcd-v3.2.7:
+    image: "quay.io/coreos/etcd:v3.2.7"
+    container_name: etcd-3.2.7
+    environment:
+      - TZ=Asia/Shanghai
+      - ETCDCTL_API=2
+    ports:
+      - 127.0.0.1:2379:2379
+      - 127.0.0.1:2380:2380
+    restart: unless-stopped
+    network_mode: "host"
+    volumes:
+      - etcd-store:/etcd-data
+    command: >
+            etcd 
+            --data-dir /etcd-data 
+            --name etcd-node 
+            --initial-advertise-peer-urls http://127.0.0.1:2380 
+            --listen-peer-urls http://127.0.0.1:2380 
+            --advertise-client-urls http://127.0.0.1:2379 
+            --listen-client-urls http://127.0.0.1:2379 
+            --initial-cluster etcd-node=http://127.0.0.1:2380
+
+volumes:
+  etcd-store:

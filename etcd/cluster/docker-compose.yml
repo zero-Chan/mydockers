@@ -1,0 +1,82 @@
+version: '2'
+
+services:
+  etcd-v3.2.7-1:
+    image: "quay.io/coreos/etcd:v3.2.7"
+    container_name: etcd-3.2.7-1
+    environment:
+      - TZ=Asia/Shanghai
+      - ETCDCTL_API=3
+    ports:
+      - 127.0.0.1:2479:2470
+      - 127.0.0.1:2480:2480
+    network_mode: "host"
+    restart: unless-stopped
+    volumes:
+      - etcd-node-1-store:/etcd-data
+    command: >
+            etcd 
+            --data-dir /etcd-data 
+            --name etcd-node-1
+            --initial-advertise-peer-urls http://127.0.0.1:2480 
+            --listen-peer-urls http://127.0.0.1:2480 
+            --advertise-client-urls http://127.0.0.1:2479 
+            --listen-client-urls http://127.0.0.1:2479 
+            --initial-cluster etcd-node-1=http://127.0.0.1:2480,etcd-node-2=http://127.0.0.1:2580,etcd-node-3=http://127.0.0.1:2680
+            --initial-cluster-state new 
+            --initial-cluster-token my-etcd-token
+
+  etcd-v3.2.7-2:
+    image: "quay.io/coreos/etcd:v3.2.7"
+    container_name: etcd-3.2.7-2
+    environment:
+      - TZ=Asia/Shanghai
+      - ETCDCTL_API=3
+    ports:
+      - 127.0.0.1:2579:2570
+      - 127.0.0.1:2580:2580
+    network_mode: "host"
+    restart: unless-stopped
+    volumes:
+      - etcd-node-2-store:/etcd-data
+    command: >
+            etcd
+            --data-dir /etcd-data
+            --name etcd-node-2
+            --initial-advertise-peer-urls http://127.0.0.1:2580
+            --listen-peer-urls http://127.0.0.1:2580
+            --advertise-client-urls http://127.0.0.1:2579 
+            --listen-client-urls http://127.0.0.1:2579 
+            --initial-cluster etcd-node-1=http://127.0.0.1:2480,etcd-node-2=http://127.0.0.1:2580,etcd-node-3=http://127.0.0.1:2680
+            --initial-cluster-state new 
+            --initial-cluster-token my-etcd-token
+
+  etcd-v3.2.7-3:
+    image: "quay.io/coreos/etcd:v3.2.7"
+    container_name: etcd-3.2.7-3
+    environment:
+      - TZ=Asia/Shanghai
+      - ETCDCTL_API=3
+    ports:
+      - 127.0.0.1:2679:2670
+      - 127.0.0.1:2680:2680
+    network_mode: "host"
+    restart: unless-stopped
+    volumes:
+      - etcd-node-3-store:/etcd-data
+    command: >
+            etcd
+            --data-dir /etcd-data
+            --name etcd-node-3
+            --initial-advertise-peer-urls http://127.0.0.1:2680
+            --listen-peer-urls http://127.0.0.1:2680
+            --advertise-client-urls http://127.0.0.1:2679
+            --listen-client-urls http://127.0.0.1:2679
+            --initial-cluster etcd-node-1=http://127.0.0.1:2480,etcd-node-2=http://127.0.0.1:2580,etcd-node-3=http://127.0.0.1:2680
+            --initial-cluster-state new
+            --initial-cluster-token my-etcd-token
+
+volumes:
+  etcd-node-1-store:
+  etcd-node-2-store:
+  etcd-node-3-store:
