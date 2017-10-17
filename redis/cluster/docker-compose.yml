@@ -1,0 +1,70 @@
+version: '2'
+
+services:
+  redis-3.2.10-node1:
+    image: "redis:3.2.10"
+    container_name: redis-3.2.10-node1
+    restart: unless-stopped
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+      - redis-3.2.10-node1-volume:/data
+    command: /usr/local/etc/redis/redis.conf --bind 0.0.0.0 --port 10381 
+    network_mode: host
+
+  redis-3.2.10-node2:
+    image: "redis:3.2.10"
+    container_name: redis-3.2.10-node2
+    restart: unless-stopped
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+      - redis-3.2.10-node2-volume:/data
+    command: /usr/local/etc/redis/redis.conf --bind 0.0.0.0 --port 10382
+    network_mode: host
+
+  redis-3.2.10-node3:
+    image: "redis:3.2.10"
+    container_name: redis-3.2.10-node3
+    restart: unless-stopped
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+      - redis-3.2.10-node3-volume:/data
+    command: /usr/local/etc/redis/redis.conf --bind 0.0.0.0 --port 10383
+    network_mode: host
+
+  redis-3.2.10-node4:
+    image: "redis:3.2.10"
+    container_name: redis-3.2.10-node4
+    restart: unless-stopped
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+      - redis-3.2.10-node4-volume:/data
+    command: /usr/local/etc/redis/redis.conf --bind 0.0.0.0 --port 10384
+    network_mode: host
+
+  redis-3.2.10-node5:
+    image: "redis:3.2.10"
+    container_name: redis-3.2.10-node5
+    restart: unless-stopped
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+      - redis-3.2.10-node5-volume:/data
+    command: /usr/local/etc/redis/redis.conf --bind 0.0.0.0 --port 10385
+    network_mode: host
+
+  redis-3.2.10-node6:
+    image: "redis:3.2.10"
+    container_name: redis-3.2.10-node6
+    restart: unless-stopped
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+      - redis-3.2.10-node6-volume:/data
+    command: /usr/local/etc/redis/redis.conf --bind 0.0.0.0 --port 10386
+    network_mode: host
+
+volumes:
+  redis-3.2.10-node1-volume:
+  redis-3.2.10-node2-volume:
+  redis-3.2.10-node3-volume:
+  redis-3.2.10-node4-volume:
+  redis-3.2.10-node5-volume:
+  redis-3.2.10-node6-volume:

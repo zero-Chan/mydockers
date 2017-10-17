@@ -7,7 +7,7 @@ services:
     restart: unless-stopped
     volumes:
       - redis-3.2.10-volume:/data
-    command: --bind 0.0.0.0 --port 10379
+    command: --bind 0.0.0.0 --port 10379 
     network_mode: host
 
 volumes:
